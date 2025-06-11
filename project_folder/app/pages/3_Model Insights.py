@@ -11,7 +11,10 @@ Here, you can explore:
 
 st.subheader("\n**The Original Loan Dataset**:\n", divider="red")
 
-LoanDF = pd.read_csv("../Loan.csv")
+import os
+# Dynamically get the correct path
+script_dir = os.path.dirname(__file__)  # Gets the folder where the script is
+csv_path = os.path.join(script_dir, "Loan.csv")  # If CSV is in the same folder
 st.write(LoanDF)
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
 st.markdown("""
