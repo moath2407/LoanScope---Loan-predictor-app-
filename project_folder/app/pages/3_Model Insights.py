@@ -53,7 +53,7 @@ script_dir = os.path.dirname(__file__)  # Gets the folder where the script is
 xlsx_path = os.path.join(script_dir, "Loan_Predictions_Report.xlsx")
 DF = pd.read_csv(xlsx_path)
 st.dataframe(DF)
-st.write(DF
+st.write(DF)
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
 image = Image.open("pages/LineGraph.png")
