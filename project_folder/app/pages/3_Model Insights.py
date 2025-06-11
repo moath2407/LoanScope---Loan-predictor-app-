@@ -52,7 +52,7 @@ st.write("""
 st.title("📄 Excel Sheet Preview")
 script_dir = os.path.dirname(__file__)  # Gets the folder of the current script
 xlsx_path = os.path.join(script_dir, "Miniloan.xlsx")
-miniloan_data = pd.read_excel(xlsx_path)
+miniloan_data = pd.read_excel(xlsx_path, engine='xlrd')  # Requires xlrd package
 st.write(miniloan_data)
 
 
