@@ -49,8 +49,9 @@ st.write("""
 
 5. **Actual Status**: The true loan decision ("Denied" or "Approved"), based on the actual risk score (Provided in the Original loan dataset).""")
 st.title("📄 Excel Sheet Preview")
-miniloan = pd.read_excel("Miniloan.xlsx")
-st.write(miniloan)
+csv_path1 = os.path.join(script_dir, "Miniloan.csv")  # If CSV is in the same folder
+LoanDFmini = pd.read_csv(csv_path1)
+st.write(LoanDFmini)
 
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
