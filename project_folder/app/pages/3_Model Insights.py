@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import os
 st.set_page_config(layout="wide")
 st.title("Model Evaluation & Data Overview section")
 st.write("""Welcome to the Model Evaluation & Data Overview section of our loan application risk assessment tool.
@@ -10,7 +11,8 @@ Here, you can explore:
 
 st.subheader("\n**The Original Loan Dataset**:\n", divider="red")
 
-LoanDF = pd.read_csv("../Loan.csv")  # Go up one level from pages/ to find Loan.csv
+
+LoanDF = pd.read_csv(os.path.join(os.path.dirname(__file__), "../Loan.csv")
 
 st.write(LoanDF)
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
