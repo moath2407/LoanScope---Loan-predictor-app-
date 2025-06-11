@@ -55,7 +55,8 @@ st.write(LoanDFmini)
 
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
-image = Image.open("pages/LineGraph.png")
+image_path1 = os.path.join(script_dir, "LineGraph.png")
+image = Image.open(image_path1)
 st.write(image)
 
 st.subheader("\n_**Potential Issues With The Model**:_\n", divider="grey")
