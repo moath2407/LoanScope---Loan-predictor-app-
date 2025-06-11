@@ -10,7 +10,7 @@ Here, you can explore:
 
 st.subheader("\n**The Original Loan Dataset**:\n", divider="red")
 
-LoanDF = pd.read_csv("Loan.csv")
+LoanDF = pd.read_csv("../Loan.csv")
 df = pd.read_excel("Loan_Predictions_Report.xlsx")
 st.write(LoanDF)
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
