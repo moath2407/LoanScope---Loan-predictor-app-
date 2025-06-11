@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import os
 from PIL import Image
 st.set_page_config(layout="wide")
 st.title("Model Evaluation & Data Overview section")
@@ -11,10 +10,8 @@ Here, you can explore:
 
 st.subheader("\n**The Original Loan Dataset**:\n", divider="red")
 
-current_dir = os.path.dirname(__file__)
-file_path = os.path.join(current_dir, "../Loan.csv")
+LoanDF = pd.read_csv("page/Loan.csv")
 
-LoanDF = pd.read_csv(file_path)df = pd.read_excel("pages/Loan_Predictions_Report.xlsx")
 st.write(LoanDF)
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
 st.markdown("""
