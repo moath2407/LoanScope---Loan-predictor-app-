@@ -17,6 +17,7 @@ script_dir = os.path.dirname(__file__)  # Gets the folder where the script is
 csv_path = os.path.join(script_dir, "Loan.csv")  # If CSV is in the same folder
 LoanDF = pd.read_csv(csv_path)
 st.write(LoanDF)
+
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
 st.markdown("""
 _How It Works:_
@@ -48,7 +49,11 @@ st.write("""
 
 5. **Actual Status**: The true loan decision ("Denied" or "Approved"), based on the actual risk score (Provided in the Original loan dataset).""")
 st.title("📄 Excel Sheet Preview")
-st.dataframe(df)
+script_dir = os.path.dirname(__file__)  # Gets the folder where the script is
+xlsx_path = os.path.join(script_dir, "Loan_Predictions_Report.xlsx")
+DF = pd.read_csv(xlsx_path)
+st.dataframe(DF)
+st.write(DF
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
 image = Image.open("pages/LineGraph.png")
