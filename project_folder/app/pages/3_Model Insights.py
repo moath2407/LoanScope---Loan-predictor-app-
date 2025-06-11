@@ -1,5 +1,4 @@
 import streamlit as st
-import openpyxl
 import pandas as pd
 from PIL import Image
 import os
@@ -50,10 +49,8 @@ st.write("""
 
 5. **Actual Status**: The true loan decision ("Denied" or "Approved"), based on the actual risk score (Provided in the Original loan dataset).""")
 st.title("📄 Excel Sheet Preview")
-script_dir = os.path.dirname(__file__)  # Gets the folder of the current script
-xlsx_path = os.path.join(script_dir, "Miniloan.xlsx")
-miniloan_data = pd.read_excel(xlsx_path, engine='xlrd')  # Requires xlrd package
-st.write(miniloan_data)
+miniloan = pd.read_excel("Miniloan.xlsx")
+st.write(miniloan)
 
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
