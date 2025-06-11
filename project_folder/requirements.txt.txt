@@ -12,3 +12,4 @@ PIL
 streamlit
 requests
 pydantic
+openpyxl
