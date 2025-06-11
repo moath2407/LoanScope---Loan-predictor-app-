@@ -10,8 +10,8 @@ Here, you can explore:
 
 st.subheader("\n**The Original Loan Dataset**:\n", divider="red")
 
-LoanDF = pd.read_csv("Loan.csv")
-df = pd.read_excel("Loan_Predictions_Report.xlsx")
+LoanDF = pd.read_csv("pages/Loan.csv")
+df = pd.read_excel("pages/Loan_Predictions_Report.xlsx")
 st.write(LoanDF)
 st.write("The dataset above contains 20,000 different loan applications that were used to train the ML model.")
 st.markdown("""
@@ -47,7 +47,7 @@ st.title("📄 Excel Sheet Preview")
 st.dataframe(df)
 
 st.write("To visualize the variation between the **Predicted Risk Score** vs **Actual Risk Score**:")
-image = Image.open("LineGraph.png")
+image = Image.open("pages/LineGraph.png")
 st.write(image)
 
 st.subheader("\n_**Potential Issues With The Model**:_\n", divider="grey")
