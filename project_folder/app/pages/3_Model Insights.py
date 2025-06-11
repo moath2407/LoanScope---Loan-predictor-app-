@@ -51,7 +51,7 @@ st.write("""
 st.title("📄 Excel Sheet Preview")
 script_dir1 = os.path.dirname(__file__)  # Gets the folder where the script is
 xlsx_path = os.path.join(script_dir, "Miniloan.xlsx")  # If CSV is in the same folder
-LoanminiDF = pd.read_csv(xlsx_path)
+LoanminiDF = pd.read_xlsx(xlsx_path)
 st.write(LoanminiDF)
 
 
