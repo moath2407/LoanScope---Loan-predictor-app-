@@ -45,8 +45,31 @@ with st.form("loan_application"):
     TotalLiabilities = st.number_input("Total Liabilities", min_value=0.0)
 
     submitted = st.form_submit_button("Submit & Predict!")
+    
+numerical_cols = [
+    'AnnualIncome','CreditScore','Experience','LoanAmount','LoanDuration',
+    'NumberOfDependents','MonthlyDebtPayments','CreditCardUtilizationRate','NumberOfOpenCreditLines',
+    'NumberOfCreditInquiries','DebtToIncomeRatio','NetWorth',
+    'MonthlyLoanPayment', 'TotalDebtToIncomeRatio', 'TotalLiabilities' ]
 
-model_feature = {
+categorical_var = ['EmploymentStatus', 'EducationLevel', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
+
+
+with open('model_features.pkl', 'rb') as f:
+    model_features = pickle.load(f)
+
+with open('model_Linearclassifier.pkl','rb') as f:
+    LinearSVC = pickle.load(f)
+
+with open('model_regressor.pkl','rb') as f:
+    regressor = pickle.load(f)
+
+with open('model_scaler.pkl','rb') as f:
+    scaler = pickle.load(f)
+
+
+if submitted:
+    input_dict = {
         "AnnualIncome": AnnualIncome,
         "CreditScore": CreditScore,
         "EmploymentStatus": EmploymentStatus,
@@ -71,37 +94,13 @@ model_feature = {
         "TotalDebtToIncomeRatio": TotalDebtToIncomeRatio,
         "TotalLiabilities": TotalLiabilities
     }
-numerical_cols = [
-    'AnnualIncome','CreditScore','Experience','LoanAmount','LoanDuration',
-    'NumberOfDependents','MonthlyDebtPayments','CreditCardUtilizationRate','NumberOfOpenCreditLines',
-    'NumberOfCreditInquiries','DebtToIncomeRatio','NetWorth',
-    'MonthlyLoanPayment', 'TotalDebtToIncomeRatio', 'TotalLiabilities' ]
-
-categorical_var = ['EmploymentStatus', 'EducationLevel', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
-
-
-with open('model_features.pkl', 'rb') as f:
-    model_features = pickle.load(f)
-
-with open('model_Linearclassifier.pkl','rb') as f:
-    LinearSVC = pickle.load(f)
-
-with open('model_regressor.pkl','rb') as f:
-    regressor = pickle.load(f)
-
-with open('model_scaler.pkl','rb') as f:
-    scaler = pickle.load(f)
-
-
-if submitted:
     
-    input_dict = model_feature.model_dump()
     input_df = pd.DataFrame([input_dict])
     
-    # Encode categorical variables (same as during training)
+    # Encode categorical variables
     encoded_input = pd.get_dummies(input_df, columns=categorical_var, drop_first=True)
     
-    # Ensure all expected columns are present (add missing ones with 0)
+    # Ensure all expected columns are present
     for col in model_features:
         if col not in encoded_input.columns:
             encoded_input[col] = 0
@@ -109,26 +108,24 @@ if submitted:
     # Reorder columns to match training data
     encoded_input = encoded_input[model_features]
     
-    # Standardize numerical columns (transform only, no fitting)
+    # Standardize numerical columns
     encoded_input[numerical_cols] = scaler.transform(encoded_input[numerical_cols])
     
-    # Predict the risk
+    # Make predictions
     risk_pred = round(regressor.predict(encoded_input)[0], 3)
-    
-    # Predict the approval
     approval_pred = int(LinearSVC.predict(encoded_input)[0])
+
     
-    if (approval_pred == 0):
+     if (approval_pred == 0):
         approval_pred = str("Deny!")
     else:
         approval_pred = str("Approve!")
     
-        st.markdown("""The risk score is:":{risk_pred},
-        "Loan Approval Status:":{approval_pred}""")
-    
+    st.success("Prediction completed successfully!")
+    st.write(f"The risk score is: {risk_pred}")
+    st.write(f"Loan Approval Status: {approval_status}")
 else:
-    st.status("Prediction Failed.")
-
+    st.info("Prediction Failed")
 #This should return the risk score and prediction, ONLY USE IF YOU CAN DEPLOY AN API
 #if submitted:
 #    r_apply_1 = requests.post(
