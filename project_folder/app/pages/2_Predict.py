@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import pickle
+import os
 st.set_page_config(layout="wide")
 st.title("🔢 Loan Prediction")
 
@@ -66,6 +67,7 @@ with open('model_regressor.pkl','rb') as f:
 
 with open('model_scaler.pkl','rb') as f:
     scaler = pickle.load(f)
+model_features, LinearSVC, regressor, scaler = load_models()
 
 
 if submitted:
