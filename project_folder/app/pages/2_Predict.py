@@ -55,16 +55,16 @@ numerical_cols = [
 categorical_var = ['EmploymentStatus', 'EducationLevel', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
 
 
-with open('model_features.pkl', 'rb') as f:
+with open('pages/model_features.pkl', 'rb') as f:
     model_features = pickle.load(f)
 
-with open('model_Linearclassifier.pkl','rb') as f:
+with open('pages/model_Linearclassifier.pkl','rb') as f:
     LinearSVC = pickle.load(f)
 
-with open('model_regressor.pkl','rb') as f:
+with open('pages/model_regressor.pkl','rb') as f:
     regressor = pickle.load(f)
 
-with open('model_scaler.pkl','rb') as f:
+with open('pages/model_scaler.pkl','rb') as f:
     scaler = pickle.load(f)
 
 
