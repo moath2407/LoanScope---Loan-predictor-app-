@@ -71,32 +71,6 @@ with st.form("loan_application"):
         "TotalDebtToIncomeRatio": TotalDebtToIncomeRatio,
         "TotalLiabilities": TotalLiabilities
     }
-
-class Loan(BaseModel):
-    AnnualIncome: float
-    CreditScore: float
-    EmploymentStatus: str
-    EducationLevel: str
-    Experience: float
-    LoanAmount: float
-    LoanDuration: float
-    MaritalStatus: str
-    NumberOfDependents: int
-    HomeOwnershipStatus: str
-    MonthlyDebtPayments: float
-    CreditCardUtilizationRate: float
-    NumberOfOpenCreditLines: int
-    NumberOfCreditInquiries: int
-    DebtToIncomeRatio: float
-    BankruptcyHistory: int
-    LoanPurpose: str
-    PreviousLoanDefaults: int
-    PaymentHistory: float
-    NetWorth: float
-    MonthlyLoanPayment: float
-    TotalDebtToIncomeRatio: float
-    TotalLiabilities: float
-
 numerical_cols = [
     'AnnualIncome','CreditScore','Experience','LoanAmount','LoanDuration',
     'NumberOfDependents','MonthlyDebtPayments','CreditCardUtilizationRate','NumberOfOpenCreditLines',
@@ -117,9 +91,11 @@ with open('model_regressor.pkl','rb') as f:
 
 with open('model_scaler.pkl','rb') as f:
     scaler = pickle.load(f)
+
+
 if submitted:
     
-    input_dict = application.model_dump()
+    input_dict = model_feature.model_dump()
     input_df = pd.DataFrame([input_dict])
     
     # Encode categorical variables (same as during training)
