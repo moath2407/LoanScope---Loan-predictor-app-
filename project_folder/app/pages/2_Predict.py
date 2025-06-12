@@ -70,25 +70,44 @@ categorical_var = ['EmploymentStatus', 'EducationLevel', 'MaritalStatus', 'HomeO
 #    scaler = pickle.load(f)
 #model_features, LinearSVC, regressor, scaler = load_models()
 
-#DEEPSEEK.AI FIX
+#DEEPSEEK.AI FIX - DOES NOT WORK
+#@st.cache_resource
+#def load_models():
+#    try:
+#        with open('model_features.pkl', 'rb') as f:
+ #           model_features = pickle.load(f)
+  #      with open('model_Linearclassifier.pkl', 'rb') as f:
+   #         LinearSVC = pickle.load(f)
+    #    with open('model_regressor.pkl', 'rb') as f:
+     #       regressor = pickle.load(f)
+      #  with open('model_scaler.pkl', 'rb') as f:
+       #     scaler = pickle.load(f)
+        #return model_features, LinearSVC, regressor, scaler
+    #except FileNotFoundError as e:
+     #   st.error(f"Model file not found in pages directory: {e}")
+      #  st.stop()
+       # return None, None, None, None
+
+#model_features, LinearSVC, regressor, scaler = load_models()
+
+#DEEPSEEK.AI FIX 2
+current_dir = pathlib.Path(__file__).parent
+
 @st.cache_resource
 def load_models():
     try:
-        with open('model_features.pkl', 'rb') as f:
+        with open(current_dir / 'model_features.pkl', 'rb') as f:
             model_features = pickle.load(f)
-        with open('model_Linearclassifier.pkl', 'rb') as f:
+        with open(current_dir / 'model_Linearclassifier.pkl', 'rb') as f:
             LinearSVC = pickle.load(f)
-        with open('model_regressor.pkl', 'rb') as f:
+        with open(current_dir / 'model_regressor.pkl', 'rb') as f:
             regressor = pickle.load(f)
-        with open('model_scaler.pkl', 'rb') as f:
+        with open(current_dir / 'model_scaler.pkl', 'rb') as f:
             scaler = pickle.load(f)
         return model_features, LinearSVC, regressor, scaler
-    except FileNotFoundError as e:
-        st.error(f"Model file not found in pages directory: {e}")
+    except Exception as e:
+        st.error(f"Error loading models: {str(e)}")
         st.stop()
-        return None, None, None, None
-
-model_features, LinearSVC, regressor, scaler = load_models()
 
 if submitted:
     input_dict = {
