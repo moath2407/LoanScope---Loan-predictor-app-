@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import pickle
 st.set_page_config(layout="wide")
 st.title("🔢 Loan Prediction")
 
@@ -45,8 +46,7 @@ with st.form("loan_application"):
 
     submitted = st.form_submit_button("Submit & Predict!")
 
-#Checks if submitted and creates a model_features variable to send to the API
-    model_feature = {
+model_feature = {
         "AnnualIncome": AnnualIncome,
         "CreditScore": CreditScore,
         "EmploymentStatus": EmploymentStatus,
@@ -80,16 +80,16 @@ numerical_cols = [
 categorical_var = ['EmploymentStatus', 'EducationLevel', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
 
 
-with open('pages/model_features.pkl', 'rb') as f:
+with open('model_features.pkl', 'rb') as f:
     model_features = pickle.load(f)
 
-with open('pages/model_Linearclassifier.pkl','rb') as f:
+with open('model_Linearclassifier.pkl','rb') as f:
     LinearSVC = pickle.load(f)
 
-with open('pages/model_regressor.pkl','rb') as f:
+with open('model_regressor.pkl','rb') as f:
     regressor = pickle.load(f)
 
-with open('pages/model_scaler.pkl','rb') as f:
+with open('model_scaler.pkl','rb') as f:
     scaler = pickle.load(f)
 
 
