@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import pickle
-import os
+import pathlib
 st.set_page_config(layout="wide")
 st.title("🔢 Loan Prediction")
 
