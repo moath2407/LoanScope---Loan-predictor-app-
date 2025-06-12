@@ -75,7 +75,7 @@ with st.form("loan_application"):
 #This should return the risk score and prediction
 if submitted:
     r_apply_1 = requests.post(
-        "http://127.0.0.1:8000/predict/apply", json = model_features
+        "https://loanscope-render-api-deployment.onrender.com/predict/apply", json = model_features
     )
 
     st.status("Prediction has been completed!")
