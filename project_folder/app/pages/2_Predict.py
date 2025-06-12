@@ -116,7 +116,7 @@ if submitted:
     approval_pred = int(LinearSVC.predict(encoded_input)[0])
 
     
-     if (approval_pred == 0):
+    if (approval_pred == 0):
         approval_pred = str("Deny!")
     else:
         approval_pred = str("Approve!")
